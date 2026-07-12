@@ -103,6 +103,10 @@ export async function register(data: RegisterInput) {
   const hashedPassword = await bcrypt.hash(data.password, 12);
   const userRole = (data.role || "FLEET_MANAGER") as UserRole;
 
+  if (userRole === "ADMIN") {
+    throw Object.assign(new Error("Admin users must be provisioned by an existing administrator"), { statusCode: 403 });
+  }
+
   const [newUser] = await db
     .insert(users)
     .values({

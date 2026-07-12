@@ -93,7 +93,7 @@ export const Analytics: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#171717] tracking-tight">Reports & Analytics</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">Reports & Analytics</h1>
           <p className="text-sm text-gray-500 mt-1">Review operational performance, fuel efficiency and cost analytics.</p>
         </div>
         <button
@@ -108,19 +108,19 @@ export const Analytics: React.FC = () => {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {kpis.map((kpi, idx) => (
-          <div key={idx} className="bg-white border border-[#dfdfdf] rounded-lg p-6 flex items-start justify-between shadow-sm">
+          <div key={idx} className="bg-white border border-[#E2E8F0] rounded-lg p-6 flex items-start justify-between shadow-sm">
             <div>
               <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block">{kpi.label}</span>
               {kpi.loading ? (
-                <Loader2 className="w-5 h-5 animate-spin text-[#3ecf8e] mt-2" />
+                <Loader2 className="w-5 h-5 animate-spin text-[#2563EB] mt-2" />
               ) : (
                 <>
-                  <span className="text-2xl font-bold text-[#171717] mt-2 block tracking-tight">{kpi.value}</span>
+                  <span className="text-2xl font-bold text-[#0F172A] mt-2 block tracking-tight">{kpi.value}</span>
                   <span className="text-xs text-gray-400 mt-1 block">{kpi.sub}</span>
                 </>
               )}
             </div>
-            <div className="w-9 h-9 rounded-md bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#24b47e]">
+            <div className="w-9 h-9 rounded-md bg-emerald-50 border border-emerald-100 flex items-center justify-center text-[#1D4ED8]">
               <kpi.icon className="w-5 h-5" />
             </div>
           </div>
@@ -129,10 +129,10 @@ export const Analytics: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Fleet Utilization Breakdown */}
-        <div className="bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm">
-          <h3 className="text-sm font-semibold text-[#171717] uppercase tracking-wider mb-5">Fleet Status Breakdown</h3>
+        <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm">
+          <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-5">Fleet Status Breakdown</h3>
           {utilLoading ? (
-            <div className="flex items-center justify-center py-10"><Loader2 className="w-5 h-5 animate-spin text-[#3ecf8e]" /></div>
+            <div className="flex items-center justify-center py-10"><Loader2 className="w-5 h-5 animate-spin text-[#2563EB]" /></div>
           ) : !utilizationData ? (
             <p className="text-sm text-gray-400 text-center py-10">No data available.</p>
           ) : (
@@ -144,7 +144,7 @@ export const Analytics: React.FC = () => {
                   <div key={b.status}>
                     <div className="flex justify-between text-xs font-semibold mb-1.5">
                       <span className="text-gray-600">{b.status.replace("_", " ")}</span>
-                      <span className="text-[#171717]">{b.count} ({pct}%)</span>
+                      <span className="text-[#0F172A]">{b.count} ({pct}%)</span>
                     </div>
                     <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden">
                       <div className={`h-full ${color} rounded-full`} style={{ width: `${pct}%` }} />
@@ -157,10 +157,10 @@ export const Analytics: React.FC = () => {
         </div>
 
         {/* Top Costliest Vehicles */}
-        <div className="bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm">
-          <h3 className="text-sm font-semibold text-[#171717] uppercase tracking-wider mb-5">Top Costliest Vehicles</h3>
+        <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm">
+          <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-5">Top Costliest Vehicles</h3>
           {roiLoading ? (
-            <div className="flex items-center justify-center py-10"><Loader2 className="w-5 h-5 animate-spin text-[#3ecf8e]" /></div>
+            <div className="flex items-center justify-center py-10"><Loader2 className="w-5 h-5 animate-spin text-[#2563EB]" /></div>
           ) : !topVehicles.length ? (
             <p className="text-sm text-gray-400 text-center py-10">No completed trips yet to analyze costs.</p>
           ) : (
@@ -169,7 +169,7 @@ export const Analytics: React.FC = () => {
                 <div key={v.vehicleId}>
                   <div className="flex justify-between text-xs font-semibold mb-1.5">
                     <span className="text-gray-600">{v.registrationNumber} ({v.model})</span>
-                    <span className="text-[#171717]">₹{v.totalOperationalCost?.toLocaleString()}</span>
+                    <span className="text-[#0F172A]">₹{v.totalOperationalCost?.toLocaleString()}</span>
                   </div>
                   <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
                     <div
@@ -186,12 +186,12 @@ export const Analytics: React.FC = () => {
 
       {/* Fuel Efficiency Table */}
       {fuelData?.length > 0 && (
-        <div className="bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm">
-          <h3 className="text-sm font-semibold text-[#171717] uppercase tracking-wider mb-5">Fuel Efficiency by Trip</h3>
+        <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm">
+          <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-5">Fuel Efficiency by Trip</h3>
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-[#dfdfdf] text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <tr className="border-b border-[#E2E8F0] text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   <th className="pb-3">Vehicle</th>
                   <th className="pb-3">Distance (km)</th>
                   <th className="pb-3">Fuel Used (L)</th>
@@ -201,7 +201,7 @@ export const Analytics: React.FC = () => {
               <tbody className="divide-y divide-gray-100">
                 {fuelData.slice(0, 10).map((r: any) => (
                   <tr key={r.tripId} className="hover:bg-gray-50/50">
-                    <td className="py-3 font-semibold text-[#171717]">{r.registrationNumber} <span className="text-gray-400 font-normal">({r.model})</span></td>
+                    <td className="py-3 font-semibold text-[#0F172A]">{r.registrationNumber} <span className="text-gray-400 font-normal">({r.model})</span></td>
                     <td className="py-3 text-gray-600">{r.distanceKm} km</td>
                     <td className="py-3 text-gray-600">{r.fuelUsedLiters} L</td>
                     <td className="py-3">

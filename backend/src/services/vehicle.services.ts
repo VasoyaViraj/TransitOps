@@ -24,20 +24,27 @@ export async function getVehicleById(id: string) {
 }
 
 export async function createVehicle(data: CreateVehicleInput) {
-  const [vehicle] = await db
-    .insert(vehicles)
-    .values({
-      registrationNumber: data.registrationNumber,
-      model: data.model,
-      type: (data as any).type || "VAN",
-      capacityKg: data.capacityKg,
-      odometerKm: data.odometerKm || 0,
-      acquisitionCost: data.acquisitionCost,
-      purchaseDate: data.purchaseDate ? new Date(data.purchaseDate) : null,
-    })
-    .returning();
+  try {
+    const [vehicle] = await db
+      .insert(vehicles)
+      .values({
+        registrationNumber: data.registrationNumber,
+        model: data.model,
+        type: (data as any).type || "VAN",
+        capacityKg: data.capacityKg,
+        odometerKm: data.odometerKm || 0,
+        acquisitionCost: data.acquisitionCost,
+        purchaseDate: data.purchaseDate ? new Date(data.purchaseDate) : null,
+      })
+      .returning();
 
-  return vehicle;
+    return vehicle;
+  } catch (error: any) {
+    if (error.code === "23505" || error.cause?.code === "23505" || error.message?.includes("duplicate key")) {
+      throw Object.assign(new Error("Vehicle registration number already exists"), { statusCode: 409 });
+    }
+    throw error;
+  }
 }
 
 export async function updateVehicle(id: string, data: UpdateVehicleInput) {

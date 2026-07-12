@@ -49,13 +49,13 @@ function DriverModal({
     onSubmit({ ...form, safetyScore: Number(form.safetyScore) });
   };
 
-  const inputCls = "w-full bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none";
+  const inputCls = "w-full bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg p-6 relative">
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-md text-gray-400"><X className="w-4 h-4" /></button>
-        <h2 className="text-sm font-bold text-[#171717] uppercase tracking-wider mb-5">{initial?.id ? "Edit Driver" : "Add Driver"}</h2>
+        <h2 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider mb-5">{initial?.id ? "Edit Driver" : "Add Driver"}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Full Name*</label>
@@ -99,7 +99,7 @@ function DriverModal({
           </div>
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={onClose} className="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold text-xs py-2 rounded-md transition-colors">Cancel</button>
-            <button type="submit" disabled={loading} className="flex-1 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs py-2 rounded-md transition-colors disabled:opacity-60 flex items-center justify-center gap-2">
+            <button type="submit" disabled={loading} className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs py-2 rounded-md transition-colors disabled:opacity-60 flex items-center justify-center gap-2">
               {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
               {initial?.id ? "Save Changes" : "Add Driver"}
             </button>
@@ -169,29 +169,29 @@ export const Drivers: React.FC = () => {
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#171717] tracking-tight">Drivers & Safety Profiles</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">Drivers & Safety Profiles</h1>
           <p className="text-sm text-gray-500 mt-1">Manage driver records, licensing compliance, and safety scores.</p>
         </div>
         {canEdit && (
-          <button onClick={() => { setEditDriver(undefined); setShowModal(true); }} className="flex items-center gap-2 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs px-4 py-2.5 rounded-md shadow-sm transition-colors">
+          <button onClick={() => { setEditDriver(undefined); setShowModal(true); }} className="flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs px-4 py-2.5 rounded-md shadow-sm transition-colors">
             <Plus className="w-4 h-4" /> Add Driver
           </button>
         )}
       </div>
 
-      <div className="bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm">
+      <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm">
         <div className="mb-6">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search driver by name or license..."
-            className="w-full bg-[#fafafa] text-xs px-4 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none max-w-sm"
+            className="w-full bg-[#F8FAFC] text-xs px-4 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none max-w-sm"
           />
         </div>
 
         {isLoading ? (
-          <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[#3ecf8e]" /></div>
+          <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[#2563EB]" /></div>
         ) : error ? (
           <div className="flex flex-col items-center py-16 gap-2 text-gray-400"><AlertCircle className="w-8 h-8" /><p className="text-sm">Failed to load drivers.</p></div>
         ) : filtered.length === 0 ? (
@@ -202,7 +202,7 @@ export const Drivers: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-[#dfdfdf] text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <tr className="border-b border-[#E2E8F0] text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   <th className="pb-3">Driver</th>
                   <th className="pb-3">License No.</th>
                   <th className="pb-3">Category</th>
@@ -218,7 +218,7 @@ export const Drivers: React.FC = () => {
                   const expired = isExpired(d.licenseExpiry);
                   return (
                     <tr key={d.id} className="hover:bg-gray-50/50">
-                      <td className="py-3.5 font-semibold text-[#171717]">{d.name}</td>
+                      <td className="py-3.5 font-semibold text-[#0F172A]">{d.name}</td>
                       <td className={`py-3.5 font-mono text-xs ${expired ? "text-red-500 font-semibold" : "text-gray-600"}`}>{d.licenseNumber}</td>
                       <td className="py-3.5 text-gray-600">{d.licenseCategory}</td>
                       <td className={`py-3.5 text-xs ${expired ? "text-red-500 font-semibold" : "text-gray-500"}`}>

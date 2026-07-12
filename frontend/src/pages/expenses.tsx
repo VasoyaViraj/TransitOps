@@ -16,13 +16,13 @@ function FuelModal({ open, onClose, vehicles, onSubmit, loading }: {
   });
   const [form, setForm] = useState({ vehicleId: "", tripId: "", liters: "", cost: "", date: new Date().toISOString().slice(0, 10) });
   if (!open) return null;
-  const inputCls = "w-full bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none";
+  const inputCls = "w-full bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none";
   const vehicleTrips = (tripsData || []).filter((t: any) => !form.vehicleId || t.vehicleId === form.vehicleId);
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative">
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-md text-gray-400"><X className="w-4 h-4" /></button>
-        <h2 className="text-sm font-bold text-[#171717] uppercase tracking-wider mb-5">Log Fuel Fill</h2>
+        <h2 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider mb-5">Log Fuel Fill</h2>
         <form onSubmit={(e) => { e.preventDefault(); onSubmit({ ...form, liters: Number(form.liters), cost: Number(form.cost) }); }} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Vehicle*</label>
@@ -54,7 +54,7 @@ function FuelModal({ open, onClose, vehicles, onSubmit, loading }: {
           </div>
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={onClose} className="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold text-xs py-2 rounded-md">Cancel</button>
-            <button type="submit" disabled={loading} className="flex-1 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs py-2 rounded-md disabled:opacity-60 flex items-center justify-center gap-2">
+            <button type="submit" disabled={loading} className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs py-2 rounded-md disabled:opacity-60 flex items-center justify-center gap-2">
               {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />} Log Fuel
             </button>
           </div>
@@ -73,12 +73,12 @@ function ExpenseModal({ open, onClose, onSubmit, loading }: {
   });
   const [form, setForm] = useState({ tripId: "", type: "TOLL", amount: "", description: "", date: new Date().toISOString().slice(0, 10) });
   if (!open) return null;
-  const inputCls = "w-full bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none";
+  const inputCls = "w-full bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none";
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative">
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-md text-gray-400"><X className="w-4 h-4" /></button>
-        <h2 className="text-sm font-bold text-[#171717] uppercase tracking-wider mb-5">Add Expense</h2>
+        <h2 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider mb-5">Add Expense</h2>
         <form onSubmit={(e) => { e.preventDefault(); onSubmit({ ...form, amount: Number(form.amount) }); }} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Trip*</label>
@@ -109,7 +109,7 @@ function ExpenseModal({ open, onClose, onSubmit, loading }: {
           </div>
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={onClose} className="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold text-xs py-2 rounded-md">Cancel</button>
-            <button type="submit" disabled={loading} className="flex-1 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs py-2 rounded-md disabled:opacity-60 flex items-center justify-center gap-2">
+            <button type="submit" disabled={loading} className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs py-2 rounded-md disabled:opacity-60 flex items-center justify-center gap-2">
               {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />} Add Expense
             </button>
           </div>
@@ -164,7 +164,7 @@ export const Expenses: React.FC = () => {
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#171717] tracking-tight">Fuel & Expense Management</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">Fuel & Expense Management</h1>
           <p className="text-sm text-gray-500 mt-1">Track fuel logs, tolls, and operational costs.</p>
         </div>
         {canEdit && (
@@ -172,7 +172,7 @@ export const Expenses: React.FC = () => {
             <button onClick={() => setShowFuel(true)} className="flex items-center gap-1.5 bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold text-xs px-3.5 py-2 rounded-md shadow-sm transition-colors">
               <Plus className="w-3.5 h-3.5" /> Log Fuel
             </button>
-            <button onClick={() => setShowExpense(true)} className="flex items-center gap-1.5 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs px-3.5 py-2 rounded-md shadow-sm transition-colors">
+            <button onClick={() => setShowExpense(true)} className="flex items-center gap-1.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs px-3.5 py-2 rounded-md shadow-sm transition-colors">
               <Plus className="w-3.5 h-3.5" /> Add Expense
             </button>
           </div>
@@ -181,31 +181,31 @@ export const Expenses: React.FC = () => {
 
       {/* Summary KPIs */}
       <div className="grid grid-cols-2 gap-6">
-        <div className="bg-white border border-[#dfdfdf] rounded-lg p-5 shadow-sm">
+        <div className="bg-white border border-[#E2E8F0] rounded-lg p-5 shadow-sm">
           <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block">Total Fuel Cost</span>
-          <span className="text-2xl font-bold text-[#171717] mt-1 block">₹{totalFuelCost.toLocaleString()}</span>
+          <span className="text-2xl font-bold text-[#0F172A] mt-1 block">₹{totalFuelCost.toLocaleString()}</span>
           <span className="text-xs text-gray-400">{fuelData?.length || 0} fuel log{fuelData?.length !== 1 ? "s" : ""}</span>
         </div>
-        <div className="bg-white border border-[#dfdfdf] rounded-lg p-5 shadow-sm">
+        <div className="bg-white border border-[#E2E8F0] rounded-lg p-5 shadow-sm">
           <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider block">Total Expenses</span>
-          <span className="text-2xl font-bold text-[#171717] mt-1 block">₹{totalExpenses.toLocaleString()}</span>
+          <span className="text-2xl font-bold text-[#0F172A] mt-1 block">₹{totalExpenses.toLocaleString()}</span>
           <span className="text-xs text-gray-400">{expenseData?.length || 0} expense record{expenseData?.length !== 1 ? "s" : ""}</span>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Fuel Logs */}
-        <div className="bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm">
-          <h3 className="text-sm font-semibold text-[#171717] uppercase tracking-wider mb-5">Fuel Logs</h3>
+        <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm">
+          <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-5">Fuel Logs</h3>
           {fuelLoading ? (
-            <div className="flex items-center justify-center py-10"><Loader2 className="w-5 h-5 animate-spin text-[#3ecf8e]" /></div>
+            <div className="flex items-center justify-center py-10"><Loader2 className="w-5 h-5 animate-spin text-[#2563EB]" /></div>
           ) : !fuelData?.length ? (
             <p className="text-sm text-gray-400 text-center py-10">No fuel logs yet.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-[#dfdfdf] text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <tr className="border-b border-[#E2E8F0] text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     <th className="pb-3">Vehicle</th>
                     <th className="pb-3">Date</th>
                     <th className="pb-3">Liters</th>
@@ -215,7 +215,7 @@ export const Expenses: React.FC = () => {
                 <tbody className="divide-y divide-gray-100">
                   {fuelData.map((log: any) => (
                     <tr key={log.id} className="hover:bg-gray-50/50">
-                      <td className="py-3 font-semibold text-[#171717]">{log.vehicleRegistration}</td>
+                      <td className="py-3 font-semibold text-[#0F172A]">{log.vehicleRegistration}</td>
                       <td className="py-3 text-gray-500 text-xs">{new Date(log.date).toLocaleDateString("en-IN")}</td>
                       <td className="py-3 text-gray-600">{log.liters} L</td>
                       <td className="py-3 text-gray-600">₹{log.cost?.toLocaleString()}</td>
@@ -228,17 +228,17 @@ export const Expenses: React.FC = () => {
         </div>
 
         {/* Expenses */}
-        <div className="bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm">
-          <h3 className="text-sm font-semibold text-[#171717] uppercase tracking-wider mb-5">Operational Expenses</h3>
+        <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm">
+          <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-5">Operational Expenses</h3>
           {expenseLoading ? (
-            <div className="flex items-center justify-center py-10"><Loader2 className="w-5 h-5 animate-spin text-[#3ecf8e]" /></div>
+            <div className="flex items-center justify-center py-10"><Loader2 className="w-5 h-5 animate-spin text-[#2563EB]" /></div>
           ) : !expenseData?.length ? (
             <p className="text-sm text-gray-400 text-center py-10">No expenses recorded yet.</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
                 <thead>
-                  <tr className="border-b border-[#dfdfdf] text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                  <tr className="border-b border-[#E2E8F0] text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     <th className="pb-3">Trip</th>
                     <th className="pb-3">Type</th>
                     <th className="pb-3">Amount (₹)</th>
@@ -248,9 +248,9 @@ export const Expenses: React.FC = () => {
                 <tbody className="divide-y divide-gray-100">
                   {expenseData.map((exp: any) => (
                     <tr key={exp.id} className="hover:bg-gray-50/50">
-                      <td className="py-3 font-semibold text-[#171717] text-xs">{exp.tripSource} → {exp.tripDestination}</td>
+                      <td className="py-3 font-semibold text-[#0F172A] text-xs">{exp.tripSource} → {exp.tripDestination}</td>
                       <td className="py-3"><span className="text-[10px] font-semibold bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">{exp.type}</span></td>
-                      <td className="py-3 font-bold text-[#171717]">₹{exp.amount?.toLocaleString()}</td>
+                      <td className="py-3 font-bold text-[#0F172A]">₹{exp.amount?.toLocaleString()}</td>
                       <td className="py-3 text-gray-500 text-xs">{new Date(exp.date).toLocaleDateString("en-IN")}</td>
                     </tr>
                   ))}
@@ -258,9 +258,9 @@ export const Expenses: React.FC = () => {
               </table>
             </div>
           )}
-          <div className="mt-4 pt-4 border-t border-[#dfdfdf] flex justify-between items-center">
+          <div className="mt-4 pt-4 border-t border-[#E2E8F0] flex justify-between items-center">
             <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Grand Total (Fuel + Expenses)</span>
-            <span className="text-lg font-bold text-[#171717]">₹{(totalFuelCost + totalExpenses).toLocaleString()}</span>
+            <span className="text-lg font-bold text-[#0F172A]">₹{(totalFuelCost + totalExpenses).toLocaleString()}</span>
           </div>
         </div>
       </div>

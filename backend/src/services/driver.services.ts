@@ -24,19 +24,26 @@ export async function getDriverById(id: string) {
 }
 
 export async function createDriver(data: CreateDriverInput) {
-  const [driver] = await db
-    .insert(drivers)
-    .values({
-      name: data.name,
-      licenseNumber: data.licenseNumber,
-      licenseCategory: data.licenseCategory,
-      licenseExpiry: new Date(data.licenseExpiry),
-      contactNumber: data.contactNumber,
-      safetyScore: data.safetyScore ?? 100,
-    })
-    .returning();
+  try {
+    const [driver] = await db
+      .insert(drivers)
+      .values({
+        name: data.name,
+        licenseNumber: data.licenseNumber,
+        licenseCategory: data.licenseCategory,
+        licenseExpiry: new Date(data.licenseExpiry),
+        contactNumber: data.contactNumber,
+        safetyScore: data.safetyScore ?? 100,
+      })
+      .returning();
 
-  return driver;
+    return driver;
+  } catch (error: any) {
+    if (error.code === "23505" || error.cause?.code === "23505" || error.message?.includes("duplicate key")) {
+      throw Object.assign(new Error("Driver license number already exists"), { statusCode: 409 });
+    }
+    throw error;
+  }
 }
 
 export async function updateDriver(id: string, data: UpdateDriverInput) {

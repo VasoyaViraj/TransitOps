@@ -50,16 +50,16 @@ export const Login: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row bg-[#ffffff]">
       {/* Left panel */}
-      <div className="w-full md:w-[42%] bg-[#171717] text-white p-8 md:p-16 flex flex-col justify-between relative overflow-hidden">
+      <div className="w-full md:w-[42%] bg-[#0F172A] text-white p-8 md:p-16 flex flex-col justify-between relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
           <div className="w-full h-full border-r border-b border-white/20 grid grid-cols-6 grid-rows-6" />
         </div>
 
         <div className="z-10">
           <div className="flex items-center gap-3">
-            <Shield className="w-8 h-8 text-[#3ecf8e]" />
+            <Shield className="w-8 h-8 text-[#2563EB]" />
             <span className="text-2xl font-bold tracking-tight">
-              Transit<span className="text-[#3ecf8e]">Ops</span>
+              Transit<span className="text-[#2563EB]">Ops</span>
             </span>
           </div>
           <p className="text-sm text-gray-400 mt-2 font-medium">Smart Transport Operations Platform</p>
@@ -70,7 +70,7 @@ export const Login: React.FC = () => {
           <ul className="space-y-4">
             {Object.entries(ROLE_CREDENTIALS).map(([key, val]) => (
               <li key={key} className="flex items-start gap-3">
-                <span className="w-2 h-2 rounded-full bg-[#3ecf8e] mt-2 flex-shrink-0" />
+                <span className="w-2 h-2 rounded-full bg-[#2563EB] mt-2 flex-shrink-0" />
                 <div>
                   <span className="font-medium text-sm text-gray-200 block">{val.label}</span>
                   <span className="text-xs text-gray-400">{val.email}</span>
@@ -94,7 +94,7 @@ export const Login: React.FC = () => {
           className="w-full max-w-[420px]"
         >
           <div className="mb-8">
-            <h1 className="text-2xl font-bold text-[#171717] tracking-tight">Sign in to your account</h1>
+            <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">Sign in to your account</h1>
             <p className="text-sm text-gray-500 mt-1">Enter your credentials to continue</p>
           </div>
 
@@ -114,7 +114,7 @@ export const Login: React.FC = () => {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-2">
                 Role
               </label>
               <div className="relative">
@@ -122,7 +122,7 @@ export const Login: React.FC = () => {
                 <select
                   value={role}
                   onChange={(e) => handleRoleChange(e.target.value)}
-                  className="w-full bg-white text-[#171717] text-sm pl-10 pr-4 py-2.5 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none focus:ring-1 focus:ring-[#3ecf8e] transition-colors appearance-none cursor-pointer"
+                  className="w-full bg-white text-[#0F172A] text-sm pl-10 pr-4 py-2.5 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none focus:ring-1 focus:ring-[#2563EB] transition-colors appearance-none cursor-pointer"
                 >
                   {Object.entries(ROLE_CREDENTIALS).map(([key, val]) => (
                     <option key={key} value={key}>{val.label}</option>
@@ -132,7 +132,7 @@ export const Login: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-2">
                 Email Address
               </label>
               <div className="relative">
@@ -141,14 +141,14 @@ export const Login: React.FC = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-white text-[#171717] text-sm pl-10 pr-4 py-2.5 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none focus:ring-1 focus:ring-[#3ecf8e] transition-colors"
+                  className="w-full bg-white text-[#0F172A] text-sm pl-10 pr-4 py-2.5 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none focus:ring-1 focus:ring-[#2563EB] transition-colors"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-2">
+              <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-2">
                 Password
               </label>
               <div className="relative">
@@ -157,7 +157,7 @@ export const Login: React.FC = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-white text-[#171717] text-sm pl-10 pr-4 py-2.5 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none focus:ring-1 focus:ring-[#3ecf8e] transition-colors"
+                  className="w-full bg-white text-[#0F172A] text-sm pl-10 pr-4 py-2.5 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none focus:ring-1 focus:ring-[#2563EB] transition-colors"
                   placeholder="••••••••"
                   required
                 />
@@ -167,7 +167,7 @@ export const Login: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-sm py-2.5 rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#3ecf8e] focus:ring-offset-2 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-sm py-2.5 rounded-md shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#2563EB] focus:ring-offset-2 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {isLoading ? "Signing in..." : "Sign In"}
             </button>

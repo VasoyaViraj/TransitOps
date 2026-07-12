@@ -119,7 +119,7 @@ export async function updateTrip(id: string, data: Partial<CreateTripInput>) {
 }
 
 export async function dispatchTrip(tripId: string) {
-  return db.transaction(async (tx) => {
+  await db.transaction(async (tx) => {
     const [trip] = await tx
       .select()
       .from(trips)
@@ -180,12 +180,13 @@ export async function dispatchTrip(tripId: string) {
       .set({ status: "ON_TRIP", updatedAt: new Date() })
       .where(eq(drivers.id, trip.driverId));
 
-    return getTripById(tripId);
   });
+
+  return getTripById(tripId);
 }
 
 export async function completeTrip(tripId: string, data: CompleteTripInput) {
-  return db.transaction(async (tx) => {
+  await db.transaction(async (tx) => {
     const [trip] = await tx
       .select()
       .from(trips)
@@ -265,6 +266,45 @@ export async function completeTrip(tripId: string, data: CompleteTripInput) {
       });
     }
 
-    return getTripById(tripId);
   });
+
+  return getTripById(tripId);
+}
+
+export async function cancelTrip(tripId: string) {
+  await db.transaction(async (tx) => {
+    const [trip] = await tx
+      .select()
+      .from(trips)
+      .where(eq(trips.id, tripId))
+      .limit(1);
+
+    if (!trip) {
+      throw Object.assign(new Error("Trip not found"), { statusCode: 404 });
+    }
+
+    if (trip.status !== "DRAFT" && trip.status !== "DISPATCHED") {
+      throw Object.assign(new Error("Only draft or dispatched trips can be cancelled"), { statusCode: 400 });
+    }
+
+    await tx
+      .update(trips)
+      .set({ status: "CANCELLED", updatedAt: new Date() })
+      .where(eq(trips.id, tripId));
+
+    if (trip.status === "DISPATCHED") {
+      await tx
+        .update(vehicles)
+        .set({ status: "AVAILABLE", updatedAt: new Date() })
+        .where(eq(vehicles.id, trip.vehicleId));
+
+      await tx
+        .update(drivers)
+        .set({ status: "AVAILABLE", updatedAt: new Date() })
+        .where(eq(drivers.id, trip.driverId));
+    }
+
+  });
+
+  return getTripById(tripId);
 }

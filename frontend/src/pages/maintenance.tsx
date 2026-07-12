@@ -18,12 +18,12 @@ function LogModal({ open, onClose, vehicles, onSubmit, loading }: {
 }) {
   const [form, setForm] = useState({ vehicleId: "", description: "Routine Service", cost: "", date: new Date().toISOString().slice(0, 10) });
   if (!open) return null;
-  const inputCls = "w-full bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none";
+  const inputCls = "w-full bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none";
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative">
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-md text-gray-400"><X className="w-4 h-4" /></button>
-        <h2 className="text-sm font-bold text-[#171717] uppercase tracking-wider mb-5">Log Maintenance Record</h2>
+        <h2 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider mb-5">Log Maintenance Record</h2>
         <form onSubmit={(e) => { e.preventDefault(); onSubmit({ ...form, cost: Number(form.cost) }); }} className="space-y-4">
           <div>
             <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-1.5">Vehicle*</label>
@@ -55,7 +55,7 @@ function LogModal({ open, onClose, vehicles, onSubmit, loading }: {
           </div>
           <div className="flex gap-3 pt-2">
             <button type="button" onClick={onClose} className="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold text-xs py-2 rounded-md">Cancel</button>
-            <button type="submit" disabled={loading} className="flex-1 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs py-2 rounded-md disabled:opacity-60 flex items-center justify-center gap-2">
+            <button type="submit" disabled={loading} className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs py-2 rounded-md disabled:opacity-60 flex items-center justify-center gap-2">
               {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />} Save Record
             </button>
           </div>
@@ -119,20 +119,20 @@ export const Maintenance: React.FC = () => {
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#171717] tracking-tight">Maintenance Logs</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">Maintenance Logs</h1>
           <p className="text-sm text-gray-500 mt-1">Log and track vehicle service histories, costs and status changes.</p>
         </div>
         {canEdit && (
-          <button onClick={() => setShowModal(true)} className="flex items-center gap-2 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs px-4 py-2.5 rounded-md shadow-sm transition-colors">
+          <button onClick={() => setShowModal(true)} className="flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs px-4 py-2.5 rounded-md shadow-sm transition-colors">
             + Log Service
           </button>
         )}
       </div>
 
-      <div className="bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm">
-        <h3 className="text-sm font-semibold text-[#171717] uppercase tracking-wider mb-5">Service History Log</h3>
+      <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm">
+        <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-5">Service History Log</h3>
         {isLoading ? (
-          <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[#3ecf8e]" /></div>
+          <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[#2563EB]" /></div>
         ) : error ? (
           <div className="flex flex-col items-center py-16 gap-2 text-gray-400"><AlertCircle className="w-8 h-8" /><p className="text-sm">Failed to load records.</p></div>
         ) : !data?.length ? (
@@ -141,7 +141,7 @@ export const Maintenance: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-[#dfdfdf] text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <tr className="border-b border-[#E2E8F0] text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   <th className="pb-3">Vehicle</th>
                   <th className="pb-3">Description</th>
                   <th className="pb-3">Cost (₹)</th>
@@ -153,7 +153,7 @@ export const Maintenance: React.FC = () => {
               <tbody className="divide-y divide-gray-100">
                 {data.map((r: any) => (
                   <tr key={r.id} className="hover:bg-gray-50/50">
-                    <td className="py-3.5 font-semibold text-[#171717]">{r.vehicleRegistration} <span className="text-gray-400 font-normal text-xs">({r.vehicleModel})</span></td>
+                    <td className="py-3.5 font-semibold text-[#0F172A]">{r.vehicleRegistration} <span className="text-gray-400 font-normal text-xs">({r.vehicleModel})</span></td>
                     <td className="py-3.5 text-gray-600">{r.description}</td>
                     <td className="py-3.5 text-gray-600">₹{r.cost?.toLocaleString()}</td>
                     <td className="py-3.5 text-gray-500 text-xs">{new Date(r.date).toLocaleDateString("en-IN")}</td>

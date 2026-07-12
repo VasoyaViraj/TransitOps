@@ -18,12 +18,12 @@ function CompleteModal({ open, onClose, trip, onSubmit, loading }: {
 }) {
   const [form, setForm] = useState({ finalOdometerKm: "", fuelUsedLiters: "", fuelCost: "", tollCost: "0", otherExpenses: "0", revenue: "" });
   if (!open) return null;
-  const inputCls = "w-full bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none";
+  const inputCls = "w-full bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none";
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-6 relative">
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-md text-gray-400"><X className="w-4 h-4" /></button>
-        <h2 className="text-sm font-bold text-[#171717] uppercase tracking-wider mb-1">Complete Trip</h2>
+        <h2 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider mb-1">Complete Trip</h2>
         <p className="text-xs text-gray-500 mb-5">{trip?.source} → {trip?.destination}</p>
         <form onSubmit={(e) => { e.preventDefault(); onSubmit({ finalOdometerKm: Number(form.finalOdometerKm), fuelUsedLiters: Number(form.fuelUsedLiters), fuelCost: Number(form.fuelCost), tollCost: Number(form.tollCost), otherExpenses: Number(form.otherExpenses), revenue: Number(form.revenue) }); }} className="space-y-3">
           <div className="grid grid-cols-2 gap-3">
@@ -128,7 +128,7 @@ export const Trips: React.FC = () => {
   });
 
   const cancelMutation = useMutation({
-    mutationFn: (id: string) => api.patch(`/trips/${id}`, { status: "CANCELLED" }),
+    mutationFn: (id: string) => api.post(`/trips/${id}/cancel`),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["trips"] });
       qc.invalidateQueries({ queryKey: ["vehicles-available"] });
@@ -155,7 +155,7 @@ export const Trips: React.FC = () => {
     });
   };
 
-  const inputCls = "w-full bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none";
+  const inputCls = "w-full bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none";
 
   return (
     <div className="space-y-6">
@@ -168,26 +168,26 @@ export const Trips: React.FC = () => {
       />
 
       <div>
-        <h1 className="text-2xl font-bold text-[#171717] tracking-tight">Trip Dispatcher</h1>
+        <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">Trip Dispatcher</h1>
         <p className="text-sm text-gray-500 mt-1">Assign vehicles and drivers to cargo runs with weight validations.</p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Create Trip Form */}
         {canEdit && (
-          <div className="lg:col-span-5 bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm h-fit">
-            <h3 className="text-sm font-semibold text-[#171717] uppercase tracking-wider mb-5">Create & Dispatch Trip</h3>
+          <div className="lg:col-span-5 bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm h-fit">
+            <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-5">Create & Dispatch Trip</h3>
             <form onSubmit={handleDispatch} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-1.5">Source*</label>
+                <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-1.5">Source*</label>
                 <input type="text" required className={inputCls} value={form.source} onChange={(e) => setForm({ ...form, source: e.target.value })} placeholder="Ahmedabad Hub" />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-1.5">Destination*</label>
+                <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-1.5">Destination*</label>
                 <input type="text" required className={inputCls} value={form.destination} onChange={(e) => setForm({ ...form, destination: e.target.value })} placeholder="Sanand Warehouse" />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-1.5">Vehicle (Available Only)*</label>
+                <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-1.5">Vehicle (Available Only)*</label>
                 <select required className={inputCls} value={form.vehicleId} onChange={(e) => setForm({ ...form, vehicleId: e.target.value, cargoWeightKg: "" })}>
                   <option value="">Select vehicle...</option>
                   {(vehiclesData || []).map((v: any) => (
@@ -196,7 +196,7 @@ export const Trips: React.FC = () => {
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-1.5">Driver (Available Only)*</label>
+                <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-1.5">Driver (Available Only)*</label>
                 <select required className={inputCls} value={form.driverId} onChange={(e) => setForm({ ...form, driverId: e.target.value })}>
                   <option value="">Select driver...</option>
                   {(driversData || []).map((d: any) => (
@@ -206,11 +206,11 @@ export const Trips: React.FC = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-1.5">Cargo Weight (kg)*</label>
+                  <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-1.5">Cargo Weight (kg)*</label>
                   <input type="number" required className={inputCls} value={form.cargoWeightKg} onChange={(e) => setForm({ ...form, cargoWeightKg: e.target.value })} min={1} placeholder="500" />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-[#171717] uppercase tracking-wider mb-1.5">Distance (km)*</label>
+                  <label className="block text-xs font-semibold text-[#0F172A] uppercase tracking-wider mb-1.5">Distance (km)*</label>
                   <input type="number" required className={inputCls} value={form.distanceKm} onChange={(e) => setForm({ ...form, distanceKm: e.target.value })} min={1} placeholder="30" />
                 </div>
               </div>
@@ -228,7 +228,7 @@ export const Trips: React.FC = () => {
                 <button
                   type="submit"
                   disabled={!!capacityExceeded || dispatchMutation.isPending}
-                  className="flex-1 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs py-2.5 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs py-2.5 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {dispatchMutation.isPending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
                   Dispatch
@@ -246,10 +246,10 @@ export const Trips: React.FC = () => {
         )}
 
         {/* Live Board */}
-        <div className={`${canEdit ? "lg:col-span-7" : "lg:col-span-12"} bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm`}>
-          <h3 className="text-sm font-semibold text-[#171717] uppercase tracking-wider mb-5">Live Board</h3>
+        <div className={`${canEdit ? "lg:col-span-7" : "lg:col-span-12"} bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm`}>
+          <h3 className="text-sm font-semibold text-[#0F172A] uppercase tracking-wider mb-5">Live Board</h3>
           {tripsLoading ? (
-            <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[#3ecf8e]" /></div>
+            <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[#2563EB]" /></div>
           ) : !tripsData?.length ? (
             <div className="text-center py-16 text-gray-400 text-sm">No trips yet. Create your first dispatch.</div>
           ) : (
@@ -258,7 +258,7 @@ export const Trips: React.FC = () => {
                 <div key={trip.id} className="border border-gray-100 rounded-lg p-4 space-y-3">
                   <div className="flex items-start justify-between gap-2">
                     <div>
-                      <span className="font-bold text-sm text-[#171717]">{trip.source} → {trip.destination}</span>
+                      <span className="font-bold text-sm text-[#0F172A]">{trip.source} → {trip.destination}</span>
                       <div className="text-xs text-gray-400 mt-0.5">
                         {trip.vehicleRegistration && <span className="mr-3">🚛 {trip.vehicleRegistration}</span>}
                         {trip.driverName && <span>👤 {trip.driverName}</span>}

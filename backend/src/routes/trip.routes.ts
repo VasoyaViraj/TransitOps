@@ -95,4 +95,18 @@ router.post(
   }
 );
 
+router.post(
+  "/:id/cancel",
+  authenticate,
+  authorizePermission("trips", "EDIT"),
+  async (req: Request, res: Response) => {
+    try {
+      const trip = await tripService.cancelTrip(req.params.id as string);
+      res.json({ trip });
+    } catch (error: any) {
+      res.status(error.statusCode || 500).json({ error: error.message });
+    }
+  }
+);
+
 export default router;

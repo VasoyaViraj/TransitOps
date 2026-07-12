@@ -63,7 +63,7 @@ function VehicleModal({
     });
   };
 
-  const inputCls = "w-full bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none";
+  const inputCls = "w-full bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none";
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
@@ -71,7 +71,7 @@ function VehicleModal({
         <button onClick={onClose} className="absolute top-4 right-4 p-1.5 hover:bg-gray-100 rounded-md text-gray-400 hover:text-gray-600">
           <X className="w-4 h-4" />
         </button>
-        <h2 className="text-sm font-bold text-[#171717] uppercase tracking-wider mb-5">
+        <h2 className="text-sm font-bold text-[#0F172A] uppercase tracking-wider mb-5">
           {initial?.id ? "Edit Vehicle" : "Add Vehicle"}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -123,7 +123,7 @@ function VehicleModal({
             <button type="button" onClick={onClose} className="flex-1 border border-gray-200 hover:bg-gray-50 text-gray-700 font-semibold text-xs py-2 rounded-md transition-colors">
               Cancel
             </button>
-            <button type="submit" disabled={loading} className="flex-1 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs py-2 rounded-md transition-colors disabled:opacity-60 flex items-center justify-center gap-2">
+            <button type="submit" disabled={loading} className="flex-1 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs py-2 rounded-md transition-colors disabled:opacity-60 flex items-center justify-center gap-2">
               {loading && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
               {initial?.id ? "Save Changes" : "Add Vehicle"}
             </button>
@@ -210,17 +210,17 @@ export const Fleet: React.FC = () => {
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#171717] tracking-tight">Vehicle Registry</h1>
+          <h1 className="text-2xl font-bold text-[#0F172A] tracking-tight">Vehicle Registry</h1>
           <p className="text-sm text-gray-500 mt-1">Manage transport fleet inventory, status, and costs.</p>
         </div>
         {canEdit && (
-          <button onClick={() => { setEditVehicle(undefined); setShowModal(true); }} className="flex items-center gap-2 bg-[#3ecf8e] hover:bg-[#24b47e] text-[#171717] font-semibold text-xs px-4 py-2.5 rounded-md shadow-sm transition-colors">
+          <button onClick={() => { setEditVehicle(undefined); setShowModal(true); }} className="flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-semibold text-xs px-4 py-2.5 rounded-md shadow-sm transition-colors">
             <Plus className="w-4 h-4" /> Add Vehicle
           </button>
         )}
       </div>
 
-      <div className="bg-white border border-[#dfdfdf] rounded-lg p-6 shadow-sm">
+      <div className="bg-white border border-[#E2E8F0] rounded-lg p-6 shadow-sm">
         <div className="flex flex-col sm:flex-row gap-4 mb-6">
           <div className="flex-1">
             <input
@@ -228,15 +228,15 @@ export const Fleet: React.FC = () => {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search registration or model..."
-              className="w-full bg-[#fafafa] text-xs px-4 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none"
+              className="w-full bg-[#F8FAFC] text-xs px-4 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none"
             />
           </div>
           <div className="flex gap-3">
-            <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none cursor-pointer">
+            <select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)} className="bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none cursor-pointer">
               <option value="">All Types</option>
               {VEHICLE_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
             </select>
-            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-[#fafafa] text-xs px-3 py-2 rounded-md border border-[#dfdfdf] focus:border-[#3ecf8e] focus:outline-none cursor-pointer">
+            <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="bg-[#F8FAFC] text-xs px-3 py-2 rounded-md border border-[#E2E8F0] focus:border-[#2563EB] focus:outline-none cursor-pointer">
               <option value="">All Statuses</option>
               {STATUS_OPTIONS.map((s) => <option key={s} value={s}>{s.replace("_", " ")}</option>)}
             </select>
@@ -244,7 +244,7 @@ export const Fleet: React.FC = () => {
         </div>
 
         {isLoading ? (
-          <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[#3ecf8e]" /></div>
+          <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[#2563EB]" /></div>
         ) : error ? (
           <div className="flex flex-col items-center py-16 gap-2 text-gray-400"><AlertCircle className="w-8 h-8" /><p className="text-sm">Failed to load vehicles.</p></div>
         ) : filtered.length === 0 ? (
@@ -255,7 +255,7 @@ export const Fleet: React.FC = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead>
-                <tr className="border-b border-[#dfdfdf] text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                <tr className="border-b border-[#E2E8F0] text-xs font-semibold text-gray-500 uppercase tracking-wider">
                   <th className="pb-3">Reg. No</th>
                   <th className="pb-3">Model</th>
                   <th className="pb-3">Type</th>
@@ -269,7 +269,7 @@ export const Fleet: React.FC = () => {
               <tbody className="divide-y divide-gray-100">
                 {filtered.map((v) => (
                   <tr key={v.id} className="hover:bg-gray-50/50">
-                    <td className="py-3.5 font-semibold text-[#171717]">{v.registrationNumber}</td>
+                    <td className="py-3.5 font-semibold text-[#0F172A]">{v.registrationNumber}</td>
                     <td className="py-3.5 text-gray-600">{v.model}</td>
                     <td className="py-3.5 text-gray-600">{v.type}</td>
                     <td className="py-3.5 text-gray-600">{v.capacityKg} kg</td>

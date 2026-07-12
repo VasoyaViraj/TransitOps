@@ -35,16 +35,16 @@ function App() {
               style: {
                 fontSize: "13px",
                 fontWeight: 500,
-                background: "#171717",
+                background: "#0F172A",
                 color: "#fff",
                 borderRadius: "8px",
               },
               success: {
-                iconTheme: { primary: "#3ecf8e", secondary: "#171717" },
+                iconTheme: { primary: "#2563EB", secondary: "#0F172A" },
               },
               error: {
                 iconTheme: { primary: "#ef4444", secondary: "#fff" },
-                style: { background: "#fff", color: "#171717", border: "1px solid #fee2e2" },
+                style: { background: "#fff", color: "#0F172A", border: "1px solid #fee2e2" },
               },
             }}
           />

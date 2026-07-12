@@ -54,7 +54,7 @@ export async function getMaintenanceById(id: string) {
 }
 
 export async function createMaintenance(data: CreateMaintenanceInput) {
-  return db.transaction(async (tx) => {
+  const recordId = await db.transaction(async (tx) => {
     const [vehicle] = await tx
       .select()
       .from(vehicles)
@@ -84,12 +84,14 @@ export async function createMaintenance(data: CreateMaintenanceInput) {
       .set({ status: "IN_SHOP", updatedAt: new Date() })
       .where(eq(vehicles.id, data.vehicleId));
 
-    return record;
+    return record.id;
   });
+
+  return getMaintenanceById(recordId);
 }
 
 export async function completeMaintenance(id: string) {
-  return db.transaction(async (tx) => {
+  await db.transaction(async (tx) => {
     const [record] = await tx
       .select()
       .from(maintenanceLogs)
@@ -114,6 +116,7 @@ export async function completeMaintenance(id: string) {
       .set({ status: "AVAILABLE", updatedAt: new Date() })
       .where(eq(vehicles.id, record.vehicleId));
 
-    return getMaintenanceById(id);
   });
+
+  return getMaintenanceById(id);
 }
