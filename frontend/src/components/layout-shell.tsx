@@ -3,7 +3,6 @@ import { Link, useLocation, useNavigate, Outlet } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Shield,
   LayoutDashboard,
   Truck,
   Users,
@@ -111,11 +110,10 @@ export const LayoutShell: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
-                  isActive
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${isActive
                     ? "bg-gray-100 text-[#0F172A] font-semibold"
                     : "text-gray-500 hover:text-[#0F172A] hover:bg-gray-50"
-                }`}
+                  }`}
               >
                 <item.icon className={`w-4 h-4 ${isActive ? "text-[#2563EB]" : ""}`} />
                 {item.label}
@@ -131,11 +129,10 @@ export const LayoutShell: React.FC = () => {
           </div>
           <div className="overflow-hidden">
             <span className="block text-xs font-semibold text-[#0F172A] truncate">{user?.name}</span>
-            <span className={`inline-block text-[10px] font-medium px-2 py-0.5 rounded-full mt-0.5 border ${
-              isAdmin
+            <span className={`inline-block text-[10px] font-medium px-2 py-0.5 rounded-full mt-0.5 border ${isAdmin
                 ? "bg-purple-50 border-purple-100 text-purple-600"
                 : "bg-white border-gray-200 text-gray-500"
-            }`}>
+              }`}>
               {user ? formatRole(user.role) : ""}
             </span>
           </div>
@@ -157,7 +154,7 @@ export const LayoutShell: React.FC = () => {
       <aside className="hidden md:flex flex-col w-[260px] bg-white border-r border-[#E2E8F0] flex-shrink-0">
         <div className="p-6 border-b border-[#E2E8F0] flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
-            <img src="/logo.png" className="h-autow-auto"/>
+            <img src="/logo.png" className="h-autow-auto" />
           </Link>
         </div>
         <SidebarContent />
@@ -186,11 +183,10 @@ export const LayoutShell: React.FC = () => {
 
           <div className="flex items-center gap-3">
             <span className="text-xs font-semibold text-gray-700 hidden sm:block">{user?.name}</span>
-            <span className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full border ${
-              isAdmin
+            <span className={`text-[10px] font-semibold px-2.5 py-0.5 rounded-full border ${isAdmin
                 ? "bg-purple-50 border-purple-100 text-purple-600"
                 : "bg-emerald-50 border-emerald-100 text-[#1D4ED8]"
-            }`}>
+              }`}>
               {user ? formatRole(user.role) : ""}
             </span>
           </div>
@@ -216,7 +212,7 @@ export const LayoutShell: React.FC = () => {
               >
                 <div className="p-6 border-b border-[#E2E8F0] flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <img src="/logo.png" className="h-autow-auto"/>
+                    <img src="/logo.png" className="h-autow-auto" />
                   </div>
                   <button
                     onClick={() => setMobileMenuOpen(false)}

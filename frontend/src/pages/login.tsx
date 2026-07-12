@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/use-auth";
 import { motion } from "framer-motion";
-import { Shield, Mail, Lock, UserCheck, AlertCircle } from "lucide-react";
+import { Mail, Lock, UserCheck, AlertCircle } from "lucide-react";
 
 const ROLE_CREDENTIALS: Record<string, { email: string; label: string }> = {
   ADMIN: { email: "admin@transitops.com", label: "Admin" },
