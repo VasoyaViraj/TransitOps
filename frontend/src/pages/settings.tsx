@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { api } from "../lib/api";
 import { useAuth } from "../hooks/use-auth";
-import { Shield, Save, CheckCircle, RefreshCw, AlertTriangle, Lock, Loader2 } from "lucide-react";
+import { Shield, Save, RefreshCw, AlertTriangle, Lock, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 type PermLevel = "NONE" | "VIEW" | "EDIT";
@@ -41,7 +41,6 @@ export const Settings: React.FC = () => {
   const [depotName, setDepotName] = useState("Gandhinagar Depot G74");
   const [currency, setCurrency] = useState("INR");
   const [unit, setUnit] = useState("KM");
-  const [loading, setLoading] = useState(false);
   const [loadingPerms, setLoadingPerms] = useState(false);
   const [savingRole, setSavingRole] = useState<string | null>(null);
 

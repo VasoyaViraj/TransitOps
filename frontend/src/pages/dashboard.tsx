@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { api } from "../lib/api";
-import { Truck, Navigation, Wrench, Users, CheckCircle2, TrendingUp, RefreshCw, Loader2, AlertCircle } from "lucide-react";
+import { Truck, Navigation, Wrench, Users, CheckCircle2, TrendingUp, RefreshCw, AlertCircle } from "lucide-react";
 
 function StatusBadge({ status }: { status: string }) {
   const map: Record<string, string> = {
@@ -39,7 +39,7 @@ export const Dashboard: React.FC = () => {
     refetchInterval: 30000,
   });
 
-  const { data: maintenanceData, isLoading: maintLoading } = useQuery({
+  const { data: maintenanceData } = useQuery({
     queryKey: ["recent-maintenance"],
     queryFn: async () => {
       const res = await api.get("/maintenance");

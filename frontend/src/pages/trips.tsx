@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
 import { useAuth } from "../hooks/use-auth";
-import { Plus, X, CheckCircle2, XCircle, Loader2, AlertCircle, Send } from "lucide-react";
+import { X, CheckCircle2, XCircle, Loader2, Send } from "lucide-react";
 import toast from "react-hot-toast";
 
 const TRIP_STATUS_STYLES: Record<string, string> = {

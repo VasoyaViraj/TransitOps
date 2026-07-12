@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
 import { useAuth } from "../hooks/use-auth";
-import { Plus, X, Loader2, AlertCircle } from "lucide-react";
+import { Plus, X, Loader2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 const EXPENSE_TYPES = ["TOLL", "LOADING", "UNLOADING", "BORDER_TAX", "DRIVER_ALLOWANCE", "PARKING", "OTHER"];
