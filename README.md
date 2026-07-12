@@ -4,28 +4,21 @@ A full-stack Smart Transport Operations Platform for fleet management, trip disp
 
 TransitOps simulates a real logistics company's daily operations, enforcing business rules through transactional workflows and role-based access control. Built with React, Express, TypeScript, and PostgreSQL.
 
-![Dashboard](docs/dashboard.png)
+![alt text](dashboard.png)
 
 ---
 
 ## Live Demo
 
-> Demo URL coming soon.
+Link: transit-ops-five-umber.vercel.app
 
 ---
-
 ## Screenshots
+![alt text](fleetm.png)
 
-| Dashboard | Fleet Management | Trip Dispatch |
-|---|---|---|
-| ![Dashboard](docs/dashboard.png) | ![Fleet](docs/fleet.png) | ![Trips](docs/trips.png) |
+![alt text](kanben.png)
 
-| Analytics | Driver Management | Operations Board |
-|---|---|---|
-| ![Analytics](docs/analytics.png) | ![Drivers](docs/drivers.png) | ![Kanban](docs/kanban.png) |
-
----
-
+![alt text](image.png)
 ## Table of Contents
 
 - [Features](#features)
@@ -105,7 +98,7 @@ TransitOps simulates a real logistics company's daily operations, enforcing busi
 
 ## Architecture
 
-![Architecture](docs/architecture.png)
+
 
 ```
 Client (Browser)
@@ -308,7 +301,7 @@ npm run dev                   # Starts on http://localhost:5173
 
 | Role | Email | Password |
 |---|---|---|
-| Admin | admin@transitops.com | password123 |
+| Admin | admin@transitops.com | admin123 |
 | Fleet Manager | manager@transitops.com | password123 |
 | Dispatcher | dispatcher@transitops.com | password123 |
 | Safety Officer | safety@transitops.com | password123 |
@@ -326,9 +319,6 @@ This starts PostgreSQL, the backend API, and the frontend dev server in containe
 
 ---
 
-## API Documentation
-
-Interactive API documentation is available at `/api-docs` when the backend is running (Swagger UI).
 
 ### Core Endpoints
 
@@ -534,4 +524,4 @@ This project is provided for educational and demonstration purposes.
 **Aayush Parekh** \
 **Dev Desai**
 
-Built for hackathon submission.
+
