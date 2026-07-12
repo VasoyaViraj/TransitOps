@@ -157,10 +157,7 @@ export const LayoutShell: React.FC = () => {
       <aside className="hidden md:flex flex-col w-[260px] bg-white border-r border-[#E2E8F0] flex-shrink-0">
         <div className="p-6 border-b border-[#E2E8F0] flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
-            <Shield className="w-6 h-6 text-[#3ecf8e]" />
-            <span className="text-lg font-bold tracking-tight">
-              Transit<span className="text-[#3ecf8e]">Ops</span>
-            </span>
+            <img src="/logo.png" className="h-autow-auto"/>
           </Link>
         </div>
         <SidebarContent />
@@ -219,10 +216,7 @@ export const LayoutShell: React.FC = () => {
               >
                 <div className="p-6 border-b border-[#E2E8F0] flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <Shield className="w-6 h-6 text-[#3ecf8e]" />
-                    <span className="text-lg font-bold tracking-tight">
-                      Transit<span className="text-[#3ecf8e]">Ops</span>
-                    </span>
+                    <img src="/logo.png" className="h-autow-auto"/>
                   </div>
                   <button
                     onClick={() => setMobileMenuOpen(false)}

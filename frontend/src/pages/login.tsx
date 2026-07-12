@@ -17,7 +17,7 @@ export const Login: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState("admin@transitops.com");
-  const [password, setPassword] = useState("admin123");
+  const [password, setPassword] = useState("");
   const [role, setRole] = useState<string>("ADMIN");
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +43,7 @@ export const Login: React.FC = () => {
     const cred = ROLE_CREDENTIALS[selectedRole];
     if (cred) {
       setEmail(cred.email);
-      setPassword(selectedRole === "ADMIN" ? "admin123" : "password123");
+      setPassword("");
     }
   };
 
@@ -57,10 +57,7 @@ export const Login: React.FC = () => {
 
         <div className="z-10">
           <div className="flex items-center gap-3">
-            <Shield className="w-8 h-8 text-[#2563EB]" />
-            <span className="text-2xl font-bold tracking-tight">
-              Transit<span className="text-[#2563EB]">Ops</span>
-            </span>
+            <img src="/logo.png" className="h-autow-auto"/>
           </div>
           <p className="text-sm text-gray-400 mt-2 font-medium">Smart Transport Operations Platform</p>
         </div>
