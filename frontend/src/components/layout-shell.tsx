@@ -15,7 +15,6 @@ import {
   Search,
   Menu,
   X,
-  Columns3,
 } from "lucide-react";
 
 export const LayoutShell: React.FC = () => {
@@ -69,12 +68,6 @@ export const LayoutShell: React.FC = () => {
       path: "/expenses",
       icon: Fuel,
       allowed: isAdmin || hasPermission("fuelExpenses", "VIEW"),
-    },
-    {
-      label: "Operations Board",
-      path: "/kanban",
-      icon: Columns3,
-      allowed: true,
     },
     {
       label: "Analytics",
