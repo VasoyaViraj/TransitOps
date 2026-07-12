@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { authenticate } from "../middleware/authenticate.js";
-import { authorize } from "../middleware/authorize.js";
+import { authorizePermission } from "../middleware/authorize.js";
 import { validate } from "../middleware/validate.js";
 import { createMaintenanceSchema } from "../validators/maintenance.validator.js";
 import * as maintenanceService from "../services/maintenance.services.js";
@@ -11,7 +11,7 @@ const router = Router();
 router.get(
   "/",
   authenticate,
-  authorize("FLEET_MANAGER"),
+  authorizePermission("maintenance", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const status = req.query.status as MaintenanceStatus | undefined;
@@ -26,7 +26,7 @@ router.get(
 router.get(
   "/:id",
   authenticate,
-  authorize("FLEET_MANAGER"),
+  authorizePermission("maintenance", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const record = await maintenanceService.getMaintenanceById(req.params.id as string);
@@ -40,7 +40,7 @@ router.get(
 router.post(
   "/",
   authenticate,
-  authorize("FLEET_MANAGER"),
+  authorizePermission("maintenance", "EDIT"),
   validate(createMaintenanceSchema),
   async (req: Request, res: Response) => {
     try {
@@ -55,7 +55,7 @@ router.post(
 router.patch(
   "/:id/complete",
   authenticate,
-  authorize("FLEET_MANAGER"),
+  authorizePermission("maintenance", "EDIT"),
   async (req: Request, res: Response) => {
     try {
       const record = await maintenanceService.completeMaintenance(req.params.id as string);

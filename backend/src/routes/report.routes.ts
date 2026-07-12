@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { authenticate } from "../middleware/authenticate.js";
-import { authorize } from "../middleware/authorize.js";
+import { authorizePermission } from "../middleware/authorize.js";
 import * as reportService from "../services/report.services.js";
 
 const router = Router();
@@ -8,7 +8,7 @@ const router = Router();
 router.get(
   "/fuel-efficiency",
   authenticate,
-  authorize("FINANCIAL_ANALYST", "FLEET_MANAGER"),
+  authorizePermission("analytics", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const vehicleId = req.query.vehicleId as string | undefined;
@@ -23,7 +23,7 @@ router.get(
 router.get(
   "/fleet-utilization",
   authenticate,
-  authorize("FINANCIAL_ANALYST", "FLEET_MANAGER"),
+  authorizePermission("analytics", "VIEW"),
   async (_req: Request, res: Response) => {
     try {
       const data = await reportService.getFleetUtilization();
@@ -37,7 +37,7 @@ router.get(
 router.get(
   "/operational-cost",
   authenticate,
-  authorize("FINANCIAL_ANALYST"),
+  authorizePermission("analytics", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const vehicleId = req.query.vehicleId as string | undefined;
@@ -52,7 +52,7 @@ router.get(
 router.get(
   "/roi",
   authenticate,
-  authorize("FINANCIAL_ANALYST"),
+  authorizePermission("analytics", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const vehicleId = req.query.vehicleId as string | undefined;

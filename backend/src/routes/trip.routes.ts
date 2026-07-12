@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { authenticate } from "../middleware/authenticate.js";
-import { authorize } from "../middleware/authorize.js";
+import { authorizePermission } from "../middleware/authorize.js";
 import { validate } from "../middleware/validate.js";
 import { createTripSchema, completeTripSchema } from "../validators/trip.validator.js";
 import * as tripService from "../services/trip.services.js";
@@ -11,7 +11,7 @@ const router = Router();
 router.get(
   "/",
   authenticate,
-  authorize("DISPATCHER", "FLEET_MANAGER"),
+  authorizePermission("trips", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const status = req.query.status as TripStatus | undefined;
@@ -26,7 +26,7 @@ router.get(
 router.get(
   "/:id",
   authenticate,
-  authorize("DISPATCHER", "FLEET_MANAGER"),
+  authorizePermission("trips", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const trip = await tripService.getTripById(req.params.id as string);
@@ -40,7 +40,7 @@ router.get(
 router.post(
   "/",
   authenticate,
-  authorize("DISPATCHER"),
+  authorizePermission("trips", "EDIT"),
   validate(createTripSchema),
   async (req: Request, res: Response) => {
     try {
@@ -55,7 +55,7 @@ router.post(
 router.patch(
   "/:id",
   authenticate,
-  authorize("DISPATCHER"),
+  authorizePermission("trips", "EDIT"),
   async (req: Request, res: Response) => {
     try {
       const trip = await tripService.updateTrip(req.params.id as string, req.body);
@@ -69,7 +69,7 @@ router.patch(
 router.post(
   "/:id/dispatch",
   authenticate,
-  authorize("DISPATCHER"),
+  authorizePermission("trips", "EDIT"),
   async (req: Request, res: Response) => {
     try {
       const trip = await tripService.dispatchTrip(req.params.id as string);
@@ -83,7 +83,7 @@ router.post(
 router.post(
   "/:id/complete",
   authenticate,
-  authorize("DISPATCHER"),
+  authorizePermission("trips", "EDIT"),
   validate(completeTripSchema),
   async (req: Request, res: Response) => {
     try {

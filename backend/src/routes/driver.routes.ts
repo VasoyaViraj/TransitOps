@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { authenticate } from "../middleware/authenticate.js";
-import { authorize } from "../middleware/authorize.js";
+import { authorizePermission } from "../middleware/authorize.js";
 import { validate } from "../middleware/validate.js";
 import { createDriverSchema, updateDriverSchema } from "../validators/driver.validator.js";
 import * as driverService from "../services/driver.services.js";
@@ -11,7 +11,7 @@ const router = Router();
 router.get(
   "/",
   authenticate,
-  authorize("FLEET_MANAGER", "DISPATCHER", "SAFETY_OFFICER"),
+  authorizePermission("drivers", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const status = req.query.status as DriverStatus | undefined;
@@ -26,7 +26,7 @@ router.get(
 router.get(
   "/:id",
   authenticate,
-  authorize("FLEET_MANAGER", "DISPATCHER", "SAFETY_OFFICER"),
+  authorizePermission("drivers", "VIEW"),
   async (req: Request, res: Response) => {
     try {
       const driver = await driverService.getDriverById(req.params.id as string);
@@ -40,7 +40,7 @@ router.get(
 router.post(
   "/",
   authenticate,
-  authorize("FLEET_MANAGER", "SAFETY_OFFICER"),
+  authorizePermission("drivers", "EDIT"),
   validate(createDriverSchema),
   async (req: Request, res: Response) => {
     try {
@@ -55,7 +55,7 @@ router.post(
 router.patch(
   "/:id",
   authenticate,
-  authorize("FLEET_MANAGER", "SAFETY_OFFICER"),
+  authorizePermission("drivers", "EDIT"),
   validate(updateDriverSchema),
   async (req: Request, res: Response) => {
     try {
@@ -70,7 +70,7 @@ router.patch(
 router.delete(
   "/:id",
   authenticate,
-  authorize("SAFETY_OFFICER"),
+  authorizePermission("drivers", "EDIT"),
   async (req: Request, res: Response) => {
     try {
       const driver = await driverService.suspendDriver(req.params.id as string);
