@@ -16,14 +16,37 @@ import taskRoutes from "./routes/task.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = (process.env.FRONTEND_URL || "http://localhost:5173")
+
+const defaultAllowedOrigins = [
+  "http://localhost:5173",
+  "https://transit-ops-five-umber.vercel.app",
+];
+
+const configuredOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.FRONTEND_URLS,
+  process.env.CORS_ORIGINS,
+]
+  .filter(Boolean)
+  .join(",");
+
+const allowedOrigins = [...defaultAllowedOrigins, configuredOrigins]
+  .join(",")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
 
+const allowedOriginPatterns = [
+  /^https:\/\/transit-ops[-a-z0-9]*\.vercel\.app$/,
+];
+
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (
+      !origin ||
+      allowedOrigins.includes(origin) ||
+      allowedOriginPatterns.some((pattern) => pattern.test(origin))
+    ) {
       callback(null, true);
       return;
     }
