@@ -29,6 +29,7 @@ export async function createVehicle(data: CreateVehicleInput) {
     .values({
       registrationNumber: data.registrationNumber,
       model: data.model,
+      type: (data as any).type || "VAN",
       capacityKg: data.capacityKg,
       odometerKm: data.odometerKm || 0,
       acquisitionCost: data.acquisitionCost,
