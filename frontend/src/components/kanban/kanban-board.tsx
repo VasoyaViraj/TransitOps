@@ -11,11 +11,13 @@ import {
   type DragEndEvent,
   type DragOverEvent,
 } from "@dnd-kit/core";
-import { sortableKeyboardCoordinates, arrayMove } from "@dnd-kit/sortable";
+import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { KanbanColumn } from "./kanban-column";
 import { TaskCard } from "./task-card";
 import type { Task } from "../../hooks/use-kanban";
 import { COLUMN_STATUSES } from "../../hooks/use-kanban";
+
+type TaskStatus = Task["status"];
 
 interface KanbanBoardProps {
   tasks: Task[];
@@ -50,10 +52,15 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
     return grouped;
   }, [tasks]);
 
+  const isColumnStatus = useCallback(
+    (value: string): value is TaskStatus => COLUMN_STATUSES.includes(value as TaskStatus),
+    [],
+  );
+
   const findColumn = useCallback(
-    (taskId: string) => {
+    (taskId: string): TaskStatus | null => {
       for (const [status, items] of Object.entries(groupedTasks)) {
-        if (items.some((t) => t.id === taskId)) return status;
+        if (items.some((t) => t.id === taskId)) return status as TaskStatus;
       }
       return null;
     },
@@ -79,7 +86,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
       const overId = over.id as string;
 
       const activeColumn = findColumn(activeId);
-      const overColumn = COLUMN_STATUSES.includes(overId as any) ? overId : findColumn(overId);
+      const overColumn = isColumnStatus(overId) ? overId : findColumn(overId);
 
       if (!activeColumn || !overColumn) return;
 
@@ -87,7 +94,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
         onStatusChange(activeId, overColumn);
       }
     },
-    [findColumn, onStatusChange],
+    [findColumn, isColumnStatus, onStatusChange],
   );
 
   const handleDragOver = useCallback(
@@ -99,7 +106,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
       const overId = over.id as string;
 
       const activeColumn = findColumn(activeId);
-      const overColumn = COLUMN_STATUSES.includes(overId as any) ? overId : findColumn(overId);
+      const overColumn = isColumnStatus(overId) ? overId : findColumn(overId);
 
       if (!activeColumn || !overColumn || activeColumn === overColumn) return;
 
@@ -122,7 +129,7 @@ export const KanbanBoard: React.FC<KanbanBoardProps> = ({
         return newCols;
       });
     },
-    [findColumn, groupedTasks],
+    [findColumn, groupedTasks, isColumnStatus],
   );
 
   const displayColumns = useMemo(() => {

@@ -10,7 +10,6 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
-import { Badge } from "../ui/badge";
 import {
   Select,
   SelectContent,
@@ -30,16 +29,10 @@ import {
   Trash2,
   Check,
   Plus,
-  X,
   Clock,
-  Calendar,
-  User,
   Tag,
   MessageSquare,
-  Paperclip,
   CheckSquare,
-  Eye,
-  EyeOff,
   History,
   AlertTriangle,
   Copy,
@@ -141,8 +134,6 @@ export const TaskDialog: React.FC<TaskDialogProps> = ({
   const [comment, setComment] = useState("");
   const [checklistInput, setChecklistInput] = useState("");
   const [submitting, setSubmitting] = useState(false);
-
-  const isEditing = !isCreating && task;
 
   useEffect(() => {
     if (isCreating) {
@@ -561,8 +552,8 @@ export const TaskDialog: React.FC<TaskDialogProps> = ({
             </div>
             <div className="flex items-center gap-2">
               <Button variant="outline" size="sm" onClick={onClose}>Cancel</Button>
-              <Button size="sm" onClick={handleSubmit} disabled={submitting || !title.trim()}>
-                {submitting ? (
+              <Button size="sm" onClick={handleSubmit} disabled={loading || submitting || !title.trim()}>
+                {loading || submitting ? (
                   <Loader2 className="w-3.5 h-3.5 animate-spin mr-1" />
                 ) : null}
                 {isCreating ? "Create" : "Save"}

@@ -19,8 +19,6 @@ import {
   COLUMN_STATUSES,
   STATUS_LABELS,
   type Task,
-  type TaskDetails,
-  type Label,
 } from "../hooks/use-kanban";
 import { useAuth } from "../hooks/use-auth";
 import { cn } from "../lib/utils";
@@ -34,7 +32,7 @@ import {
 } from "lucide-react";
 
 export const Kanban: React.FC = () => {
-  const { user, isAdmin, hasPermission } = useAuth();
+  const { isAdmin, hasPermission } = useAuth();
   const canEdit = isAdmin || hasPermission("fleet", "EDIT");
 
   const [search, setSearch] = useState("");
