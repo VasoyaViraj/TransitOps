@@ -1,11 +1,23 @@
 import { relations } from "drizzle-orm";
-import { users } from "./schema/users";
-import { vehicles } from "./schema/vehicles";
-import { drivers } from "./schema/drivers";
-import { trips } from "./schema/trips";
-import { maintenanceLogs } from "./schema/maintenance-logs";
-import { fuelLogs } from "./schema/fuel-logs";
-import { expenses } from "./schema/expenses";
+import { users } from "./schema/users.js";
+import { vehicles } from "./schema/vehicles.js";
+import { drivers } from "./schema/drivers.js";
+import { trips } from "./schema/trips.js";
+import { maintenanceLogs } from "./schema/maintenance-logs.js";
+import { fuelLogs } from "./schema/fuel-logs.js";
+import { expenses } from "./schema/expenses.js";
+import { sessions } from "./schema/sessions.js";
+
+export const userRelations = relations(users, ({ many }) => ({
+  sessions: many(sessions),
+}));
+
+export const sessionRelations = relations(sessions, ({ one }) => ({
+  user: one(users, {
+    fields: [sessions.userId],
+    references: [users.id],
+  }),
+}));
 
 export const vehicleRelations = relations(vehicles, ({ many }) => ({
   trips: many(trips),
@@ -54,3 +66,4 @@ export const expenseRelations = relations(expenses, ({ one }) => ({
     references: [trips.id],
   }),
 }));
+

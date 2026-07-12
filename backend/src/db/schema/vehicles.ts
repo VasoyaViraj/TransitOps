@@ -5,6 +5,7 @@ export const vehicles = pgTable("vehicles", {
   id: uuid("id").primaryKey().defaultRandom(),
   registrationNumber: varchar("registration_number", { length: 20 }).notNull().unique(),
   model: varchar("model", { length: 255 }).notNull(),
+  type: varchar("type", { length: 50 }).notNull().default("VAN"),
   capacityKg: real("capacity_kg").notNull(),
   odometerKm: real("odometer_km").notNull().default(0),
   acquisitionCost: real("acquisition_cost").notNull(),

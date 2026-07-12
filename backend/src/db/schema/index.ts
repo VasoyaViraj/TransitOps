@@ -6,3 +6,7 @@ export { trips } from "./trips";
 export { maintenanceLogs } from "./maintenance-logs";
 export { fuelLogs } from "./fuel-logs";
 export { expenses } from "./expenses";
+export { sessions } from "./sessions";
+export { rolePermissions } from "./role-permissions";
+
+
