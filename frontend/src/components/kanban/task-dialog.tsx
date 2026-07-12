@@ -64,7 +64,7 @@ import {
   type TaskDetails,
   type Comment,
   type Checklist,
-  type Label,
+  type Label as KanbanLabel,
 } from "../../hooks/use-kanban";
 import { useAuth } from "../../hooks/use-auth";
 import { format } from "date-fns";
@@ -76,7 +76,7 @@ interface TaskDialogProps {
   task: TaskDetails | Task | null;
   isCreating: boolean;
   initialStatus?: string;
-  labels: Label[];
+  labels: KanbanLabel[];
   onSubmit: (data: any) => void;
   onStatusChange: (id: string, status: string) => void;
   onDelete: (id: string) => void;
