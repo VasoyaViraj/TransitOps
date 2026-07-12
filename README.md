@@ -10,7 +10,7 @@ TransitOps simulates a real logistics company's daily operations, enforcing busi
 
 ## Live Demo
 
-Link: transit-ops-five-umber.vercel.app
+Link: [transit-ops](https://transit-ops-five-umber.vercel.app/)
 
 ---
 ## Screenshots
