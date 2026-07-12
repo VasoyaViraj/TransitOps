@@ -1,11 +1,11 @@
-import { eq, sql, count } from "drizzle-orm";
+import { eq, and, sql, count } from "drizzle-orm";
 import { db } from "../db/index.js";
 import { vehicles, drivers, trips, fuelLogs, expenses, maintenanceLogs } from "../db/schema/index.js";
 
 export async function getDashboardStats() {
   const [vehicleStats] = await db
     .select({
-      total: count(),
+      count: count(),
     })
     .from(vehicles);
 
@@ -75,9 +75,10 @@ export async function getFuelEfficiency(vehicleId?: string) {
     .from(trips)
     .innerJoin(vehicles, eq(trips.vehicleId, vehicles.id))
     .where(
-      vehicleId
-        ? eq(trips.vehicleId, vehicleId)
-        : eq(trips.status, "COMPLETED")
+      and(
+        eq(trips.status, "COMPLETED"),
+        vehicleId ? eq(trips.vehicleId, vehicleId) : undefined
+      )
     );
 
   return results;
@@ -119,9 +120,10 @@ export async function getOperationalCost(vehicleId?: string) {
     .from(trips)
     .innerJoin(vehicles, eq(trips.vehicleId, vehicles.id))
     .where(
-      vehicleId
-        ? eq(trips.vehicleId, vehicleId)
-        : eq(trips.status, "COMPLETED")
+      and(
+        eq(trips.status, "COMPLETED"),
+        vehicleId ? eq(trips.vehicleId, vehicleId) : undefined
+      )
     );
 
   return completedTrips;

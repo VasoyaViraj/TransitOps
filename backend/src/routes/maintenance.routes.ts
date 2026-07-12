@@ -29,7 +29,7 @@ router.get(
   authorize("FLEET_MANAGER"),
   async (req: Request, res: Response) => {
     try {
-      const record = await maintenanceService.getMaintenanceById(req.params.id);
+      const record = await maintenanceService.getMaintenanceById(req.params.id as string);
       res.json({ record });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
@@ -58,7 +58,7 @@ router.patch(
   authorize("FLEET_MANAGER"),
   async (req: Request, res: Response) => {
     try {
-      const record = await maintenanceService.completeMaintenance(req.params.id);
+      const record = await maintenanceService.completeMaintenance(req.params.id as string);
       res.json({ record });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });

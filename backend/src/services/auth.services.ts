@@ -9,8 +9,21 @@ import type { UserRole } from "../types/index.js";
 const JWT_SECRET = process.env.JWT_SECRET!;
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d";
 
+function parseExpiresIn(value: string): number {
+  const match = value.match(/^(\d+)([smhd])$/);
+  if (!match) return 7 * 24 * 60 * 60;
+  const num = parseInt(match[1], 10);
+  switch (match[2]) {
+    case "s": return num;
+    case "m": return num * 60;
+    case "h": return num * 3600;
+    case "d": return num * 86400;
+    default: return 7 * 24 * 60 * 60;
+  }
+}
+
 function generateToken(userId: string, role: UserRole): string {
-  return jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+  return jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: parseExpiresIn(JWT_EXPIRES_IN) });
 }
 
 export async function register(data: RegisterInput) {

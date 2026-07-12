@@ -29,7 +29,7 @@ router.get(
   authorize("DISPATCHER", "FLEET_MANAGER"),
   async (req: Request, res: Response) => {
     try {
-      const trip = await tripService.getTripById(req.params.id);
+      const trip = await tripService.getTripById(req.params.id as string);
       res.json({ trip });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
@@ -58,7 +58,7 @@ router.patch(
   authorize("DISPATCHER"),
   async (req: Request, res: Response) => {
     try {
-      const trip = await tripService.updateTrip(req.params.id, req.body);
+      const trip = await tripService.updateTrip(req.params.id as string, req.body);
       res.json({ trip });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
@@ -72,7 +72,7 @@ router.post(
   authorize("DISPATCHER"),
   async (req: Request, res: Response) => {
     try {
-      const trip = await tripService.dispatchTrip(req.params.id);
+      const trip = await tripService.dispatchTrip(req.params.id as string);
       res.json({ trip });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
@@ -87,7 +87,7 @@ router.post(
   validate(completeTripSchema),
   async (req: Request, res: Response) => {
     try {
-      const trip = await tripService.completeTrip(req.params.id, req.body);
+      const trip = await tripService.completeTrip(req.params.id as string, req.body);
       res.json({ trip });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });

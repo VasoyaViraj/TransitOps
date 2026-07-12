@@ -29,7 +29,7 @@ router.get(
   authorize("FLEET_MANAGER", "DISPATCHER", "SAFETY_OFFICER"),
   async (req: Request, res: Response) => {
     try {
-      const driver = await driverService.getDriverById(req.params.id);
+      const driver = await driverService.getDriverById(req.params.id as string);
       res.json({ driver });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
@@ -59,7 +59,7 @@ router.patch(
   validate(updateDriverSchema),
   async (req: Request, res: Response) => {
     try {
-      const driver = await driverService.updateDriver(req.params.id, req.body);
+      const driver = await driverService.updateDriver(req.params.id as string, req.body);
       res.json({ driver });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
@@ -73,7 +73,7 @@ router.delete(
   authorize("SAFETY_OFFICER"),
   async (req: Request, res: Response) => {
     try {
-      const driver = await driverService.suspendDriver(req.params.id);
+      const driver = await driverService.suspendDriver(req.params.id as string);
       res.json({ driver });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });

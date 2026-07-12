@@ -20,7 +20,7 @@ router.get("/", authenticate, async (req: Request, res: Response) => {
 
 router.get("/:id", authenticate, async (req: Request, res: Response) => {
   try {
-    const vehicle = await vehicleService.getVehicleById(req.params.id);
+    const vehicle = await vehicleService.getVehicleById(req.params.id as string);
     res.json({ vehicle });
   } catch (error: any) {
     res.status(error.statusCode || 500).json({ error: error.message });
@@ -49,7 +49,7 @@ router.patch(
   validate(updateVehicleSchema),
   async (req: Request, res: Response) => {
     try {
-      const vehicle = await vehicleService.updateVehicle(req.params.id, req.body);
+      const vehicle = await vehicleService.updateVehicle(req.params.id as string, req.body);
       res.json({ vehicle });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
@@ -63,7 +63,7 @@ router.delete(
   authorize("FLEET_MANAGER"),
   async (req: Request, res: Response) => {
     try {
-      const vehicle = await vehicleService.retireVehicle(req.params.id);
+      const vehicle = await vehicleService.retireVehicle(req.params.id as string);
       res.json({ vehicle });
     } catch (error: any) {
       res.status(error.statusCode || 500).json({ error: error.message });
