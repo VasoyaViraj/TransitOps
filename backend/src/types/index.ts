@@ -8,6 +8,12 @@ export type TripStatus = "DRAFT" | "DISPATCHED" | "IN_PROGRESS" | "COMPLETED" | 
 
 export type MaintenanceStatus = "SCHEDULED" | "IN_PROGRESS" | "COMPLETED";
 
+export type TaskStatus = "BACKLOG" | "TODO" | "IN_PROGRESS" | "WAITING_APPROVAL" | "BLOCKED" | "COMPLETED";
+
+export type TaskPriority = "LOW" | "MEDIUM" | "HIGH" | "CRITICAL";
+
+export type TaskType = "TRIP" | "MAINTENANCE" | "INSPECTION" | "FUEL" | "EXPENSE" | "DRIVER" | "VEHICLE" | "INCIDENT" | "COMPLIANCE" | "DOCUMENT_RENEWAL" | "GENERAL_TASK";
+
 export interface JwtPayload {
   userId: string;
   role: UserRole;

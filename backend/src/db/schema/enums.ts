@@ -35,3 +35,33 @@ export const maintenanceStatusEnum = pgEnum("maintenance_status", [
   "IN_PROGRESS",
   "COMPLETED",
 ]);
+
+export const taskStatusEnum = pgEnum("task_status", [
+  "BACKLOG",
+  "TODO",
+  "IN_PROGRESS",
+  "WAITING_APPROVAL",
+  "BLOCKED",
+  "COMPLETED",
+]);
+
+export const taskPriorityEnum = pgEnum("task_priority", [
+  "LOW",
+  "MEDIUM",
+  "HIGH",
+  "CRITICAL",
+]);
+
+export const taskTypeEnum = pgEnum("task_type", [
+  "TRIP",
+  "MAINTENANCE",
+  "INSPECTION",
+  "FUEL",
+  "EXPENSE",
+  "DRIVER",
+  "VEHICLE",
+  "INCIDENT",
+  "COMPLIANCE",
+  "DOCUMENT_RENEWAL",
+  "GENERAL_TASK",
+]);

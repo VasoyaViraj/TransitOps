@@ -1,4 +1,4 @@
-export { userRoleEnum, vehicleStatusEnum, driverStatusEnum, tripStatusEnum, maintenanceStatusEnum } from "./enums";
+export { userRoleEnum, vehicleStatusEnum, driverStatusEnum, tripStatusEnum, maintenanceStatusEnum, taskStatusEnum, taskPriorityEnum, taskTypeEnum } from "./enums";
 export { users } from "./users";
 export { vehicles } from "./vehicles";
 export { drivers } from "./drivers";
@@ -8,5 +8,10 @@ export { fuelLogs } from "./fuel-logs";
 export { expenses } from "./expenses";
 export { sessions } from "./sessions";
 export { rolePermissions } from "./role-permissions";
-
-
+export { tasks } from "./tasks";
+export { taskComments } from "./task-comments";
+export { taskChecklists } from "./task-checklists";
+export { taskAttachments } from "./task-attachments";
+export { taskLabels, taskToLabels } from "./task-labels";
+export { taskWatchers } from "./task-watchers";
+export { taskHistory } from "./task-history";

@@ -13,6 +13,7 @@ import { Maintenance } from "./pages/maintenance";
 import { Expenses } from "./pages/expenses";
 import { Analytics } from "./pages/analytics";
 import { Settings } from "./pages/settings";
+import { Kanban } from "./pages/kanban";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -110,6 +111,15 @@ function App() {
                 element={
                   <ProtectedRoute permission={{ module: "analytics", level: "VIEW" }}>
                     <Analytics />
+                  </ProtectedRoute>
+                }
+              />
+
+              <Route
+                path="kanban"
+                element={
+                  <ProtectedRoute>
+                    <Kanban />
                   </ProtectedRoute>
                 }
               />

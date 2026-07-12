@@ -12,6 +12,7 @@ import reportRoutes from "./routes/report.routes.js";
 import dashboardRoutes from "./routes/dashboard.routes.js";
 import fuelLogsRoutes from "./routes/fuel-logs.routes.js";
 import expensesRoutes from "./routes/expenses.routes.js";
+import taskRoutes from "./routes/task.routes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -36,6 +37,7 @@ app.use("/api/reports", reportRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/fuel-logs", fuelLogsRoutes);
 app.use("/api/expenses", expensesRoutes);
+app.use("/api/tasks", taskRoutes);
 
 app.use(errorHandler);
 
